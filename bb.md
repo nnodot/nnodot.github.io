@@ -1,1 +1,4 @@
-bb
+---
+layout: mine
+---
+bb bb bb
