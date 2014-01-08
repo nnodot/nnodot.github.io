@@ -1,3 +1,7 @@
+---
+layout: default
+---
+
 ## A New Post
 
 
