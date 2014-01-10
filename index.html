@@ -1,12 +1,12 @@
-<!doctype html>
-<html>
-  <head>
+<!DOCTYPE html>
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <title>Nnodot.github.io by nnodot</title>
+    <title>nnodot - Controlling javascript with visual programming</title>
 
-    <link rel="stylesheet" href="stylesheets/styles.css">
-    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="pygment_trac.css">
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
     <!--[if lt IE 9]>
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -15,7 +15,7 @@
   <body>
     <div class="wrapper">
       <header>
-        <h1>Nnodot.github.io</h1>
+        <h1>nnodot</h1>
         <p></p>
 
 
@@ -23,43 +23,227 @@
 
       </header>
       <section>
-        <h3>
-<a name="welcome-to-github-pages" class="anchor" href="#welcome-to-github-pages"><span class="octicon octicon-link"></span></a>Welcome to GitHub Pages.</h3>
 
-<p>This automatic page generator is the easiest way to create beautiful pages for all of your projects. Author your page content here using GitHub Flavored Markdown, select a template crafted by a designer, and publish. After your page is generated, you can check out the new branch:</p>
+<h1>
+<a name="controlling-javascript-with-visual-programming" class="anchor" href="#controlling-javascript-with-visual-programming"><span class="octicon octicon-link"></span></a>Controlling javascript with visual programming</h1>
 
-<pre><code>$ cd your_repo_root/repo_name
-$ git fetch origin
-$ git checkout gh-pages
-</code></pre>
+<h2>
+<a name="motivation" class="anchor" href="#motivation"><span class="octicon octicon-link"></span></a>Motivation</h2>
 
-<p>If you're using the GitHub for Mac, simply sync your repository and you'll see the new branch.</p>
+<p>This article presents a new way to use visual programming for javascript. It
+discusses how this approach can be useful for a wide range of use cases and
+how it might be appealing to "non-programmers" and to some programmers as
+well.</p>
 
-<h3>
-<a name="designer-templates" class="anchor" href="#designer-templates"><span class="octicon octicon-link"></span></a>Designer Templates</h3>
+<p>Visual programming is not a new idea. Neither its use with javascript. But I
+think that good ideas from various existing initiatives can be melt to go one
+step further in its usefulness.</p>
 
-<p>We've crafted some handsome templates for you to use. Go ahead and continue to layouts to browse through them. You can easily go back to edit your page before publishing. After publishing your page, you can revisit the page generator and switch to another theme. Your Page content will be preserved if it remained markdown format.</p>
+<p>I have used Pure Data (open source) and Max/MSP (its commercial counterpart)
+which are similar domain specific visual programming languages (for music and
+audio processing). It was very easy and quick to start using them. You don't
+have to learn deep concepts to have something working. Moreover you don't have
+to use complex procedures (like, say, text editing/compiling) before you can do
+anything. You open a patch from the tutorial, you look at it, execute it and
+you start to understand the general behavior thanks to the visual nature of,
+hum, visual programming. You can easily experiment things by modifying what
+you see while the patch is "running" which gives a very responsive experience.
+You don't have to dive into obscure things to start doing something useful.
+That doesn't mean that you are tied to a trivial use but you can already enjoy
+it a lot at this level. And if you feel it, you can always go deeper, learning
+more complex concepts and enjoy more powerful ways to craft your tools.</p>
 
-<h3>
-<a name="rather-drive-stick" class="anchor" href="#rather-drive-stick"><span class="octicon octicon-link"></span></a>Rather Drive Stick?</h3>
+<p>In fact, most of people in the user base are not text code programmers (i.e.
+those that write text code, compile and this kind of stuff). Some are and some
+become ones, but there is a vast majority that stick with the basic use and
+still do some things that are very useful to them. Moreover they wouldn't
+have done them if they had to do it using text code programming (even if there
+are a lots of DSL to program music/audio tools). They don't have time for
+that, or they don't enjoy it, or think it is to complicated for them.</p>
 
-<p>If you prefer to not use the automatic generator, push a branch named <code>gh-pages</code> to your repository to create a page manually. In addition to supporting regular HTML content, GitHub Pages support Jekyll, a simple, blog aware static site generator written by our own Tom Preston-Werner. Jekyll makes it easy to create site-wide headers and footers without having to copy them across every page. It also offers intelligent blog support and other advanced templating features.</p>
+<p>So these tools bring more people to programming. And they produce new things
+that maybe won't have been there otherwise. Moreover, as they are not computer
+scientist their different point of view can bring new useful ideas, visions or
+usages.</p>
 
-<h3>
-<a name="authors-and-contributors" class="anchor" href="#authors-and-contributors"><span class="octicon octicon-link"></span></a>Authors and Contributors</h3>
+<p>But that doesn't mean that there's no text code programmers that use them.
+Some of them find the blocks and links programming useful for some tasks and,
+moreover Pure Data and Max/MSP allow some text code programming by giving some
+interfacing with C or some scripting capabilities (Max/MSP has a javascript
+engine which access domain specific API so you can execute a js file from one
+Max/MSP block). So, actually text code programmers have two strings to their
+bow, they can choose which concept is the easiest for their problem at hand,
+for example: blocks and links for data flow, audio stream connection, event
+routing (there is a huge use of buttons, sliders...), etc. and text code for
+arithmetic (very painful with blocks), basic data manipulation, intensive
+computing, etc.</p>
 
-<p>You can <a href="https://github.com/blog/821" class="user-mention">@mention</a> a GitHub username to generate a link to their profile. The resulting <code>&lt;a&gt;</code> element will link to the contributor's GitHub Profile. For example: In 2007, Chris Wanstrath (<a href="https://github.com/defunkt" class="user-mention">@defunkt</a>), PJ Hyett (<a href="https://github.com/pjhyett" class="user-mention">@pjhyett</a>), and Tom Preston-Werner (<a href="https://github.com/mojombo" class="user-mention">@mojombo</a>) founded GitHub.</p>
+<p>Actually this is a success story of the concept of visual programming. These
+softwares benefit to both expert programmers and non-programmers, bring some
+new people to programming and produce original things. Even more, it is a
+commercial success: people buy Max/MSP since 15 years and some people
+eventually earn money with it (electronic artists Aphex Twin and Autechre have
+used it to compose music).</p>
 
-<h3>
-<a name="support-or-contact" class="anchor" href="#support-or-contact"><span class="octicon octicon-link"></span></a>Support or Contact</h3>
+<p>But of course, this success is very domain specific. Maybe having links to
+plug to blocks is an attractive abstraction for people that are used to plug
+cables between audio hardware. Maybe audio manipulation fits very well to
+visual representation. But I think there is more than that and it is worth
+trying to apply the good ideas of these languages to other fields.</p>
 
-<p>Having trouble with Pages? Check out the documentation at <a href="http://help.github.com/pages">http://help.github.com/pages</a> or contact <a href="mailto:support@github.com">support@github.com</a> and we’ll help you sort it out.</p>
+<p>As javascript is already everywhere (nearly) and as "javascript will soon
+rule the world"™, it is a logical choice for that.</p>
+
+<p>Concerning the legacy of visual programming for javascript there are some nice
+initiatives (NoFlo, Meemoo...) but the point here is different as the goals
+are both to stick to Pure Data and Max/MSP's nice concepts that made them
+successful and to stick as much as possible to javascript (for its good parts,
+of course) in the visual abstraction.</p>
+
+<h2>
+<a name="where-to-go" class="anchor" href="#where-to-go"><span class="octicon octicon-link"></span></a>Where to go?</h2>
+
+<p>So what such a visual programming language might look like? Let's take a
+simple example to illustrates the core concepts. Imagine you want to develop
+an HTML widget to get the id of a github user. This widget can have the
+following layout (once you have clicked the button):</p>
+
+<p><a href="file://D:\divers\now\jsconf/presentation.png" target="_blank"><img src="file://D:\divers\now\jsconf/presentation.png" alt="image" title="Presentation mode" style="max-width:100%;"></a></p>
+
+<p>And you can program the logic of the widget with something like:</p>
+
+<p><a href="file://D:\divers\now\jsconf/edit.png" target="_blank"><img src="file://D:\divers\now\jsconf/edit.png" alt="image" title="Programming mode" style="max-width:100%;"></a></p>
+
+<p>This is just a first proposition but it shows that the visual programming
+expose clearly what's going one and thanks to the script blocks, one can use
+more or less complex logic directly by calling javascript. Non-programmers
+will use simple ready to use blocks and maybe some basic scripting, and
+programmers can develop powerful javascript codes that easily integrate with
+other elements.</p>
+
+<p>So here a some of the <strong>good ideas from Pure Data</strong> to keep in the design:</p>
+
+<ul>
+<li><p>Vertical flow. As opposed to horizontal flow. It is much natural to read and
+it gives a more compact layout.</p></li>
+<li><p>Two distinct modes: presentation and editing. Respectively, it is the HTML
+(first figure above) and the visual javascript (second figure). What it is
+very important is to be able to switch from one to the other very simply, or
+even better to see the two side by side.</p></li>
+</ul><ul>
+<li><p>Display components content in blocks when appropriate. In the example we see
+the content of the button, the input and the span in their respective blocks.
+For more complex content it can be even more useful. That's the case for
+image, video, graph, dynamic content, WebGL, etc.</p></li>
+<li><p>Everything is active in editing mode. This allow a very responsive
+experience. You can test what you are doing while you add some logic. The
+environment is a de facto debug environment. And this can help understanding
+existing patches by inserting the appropriate blocks to catch some
+values/behavior. You also can quickly demo things without having to set a
+presentation mode.</p></li>
+</ul><p>And here are some <strong>design principles</strong> to follow:</p>
+
+<ul>
+<li><p>Stick to javascript. Don't try to abstract to much things. I.e. for the good
+parts of javascript, try to keep close to them as much as possible. This way a
+part of the power of javascript will be accessible to the visual programming.</p></li>
+<li><p>Keep things simple. I.e. don't add too much tools or functionalities. Keep
+them few and well craft.</p></li>
+<li><p>Allow different kind of connection: data, execution flow, event/callback, message,
+dependency, others (Web audio). And give ways to allow one to add its own ones.</p></li>
+<li><p>Keep in mind that it is not a replacement of traditional text code
+development for big systems. It is just an other way to do programming that is
+a complementary.</p></li>
+</ul><p>And one can imagine to have blocks with some small bit of code in other
+languages blocks (C, Java, etc.) that will use appropriate compilers to
+produce javascript that will be called when the blocks are execute. Or to have
+block for small parts of data intensive processing with technologies like
+Asm.js, WebCL, etc.</p>
+
+<p>Of course the <strong>development environment</strong> (or the editing mode) is target to
+the browser. This will ease adopting it by new user. The engine will be first
+in the browser but of course it will be usable everywhere else where
+javascript code can be executed. The development environment will be a tool as
+simple as possible that can be embedded in other application easily (i.e. to
+add some design capabilities to an existing application). It will be easy to
+use for newbies (mouse, touch, etc.) and appealing for developers (keyboard
+shortcuts, fast navigation and editing). And of course, this language and
+development environment will be developed with themselves as soon as possible
+and when appropriate (again, don't try to use them on place where traditional
+javascript text coding is more efficient).</p>
+
+<p>And once having developed something, one will be able to export his work to
+various targets: some HTML code that can be inserted as is in any page, a
+static HTML file, some mobile application, a NodeJS package, etc.</p>
+
+<h2>
+<a name="what-for" class="anchor" href="#what-for"><span class="octicon octicon-link"></span></a>What for?</h2>
+
+<p>All this can be useful for several kind of people with various needs. Here
+are some use cases that come to mind.</p>
+
+<p>As the first example shown in this article, one simple usage is the
+development of simple <strong>HTML component</strong> with some basic  interaction and
+processing, like an counter increment/decrement <code>&lt;input&gt;</code> with a <code>+</code> and a <code>-</code>
+buttons. An other simple usage is to build an <strong>online/desktop/mobile
+application</strong> like, for example, a TODO list application with use of CouchDB
+for online persistence.</p>
+
+<p>In a team, programmers or UX designers can <strong>prototype</strong> things quickly and share
+it easily with other people that can in turn modify things a bit, to suggest some
+enhancements for example. Once the prototype is ready it can serve as a base
+for reimplementation without visual programming if needed.</p>
+
+<p>Some <strong>data journalist</strong> might find it useful to quickly set a patch that
+gather some data, do some basic processing (statistic for example) and then
+visualize it on a figure to put in an article. <strong>Scientist</strong> may have similar
+needs, but eventually with some more complicated processing and sometime with
+expensive data crushing that can eventually be delegated to some external node
+cluster computing server by some specific blocks that manage the
+communications.</p>
+
+<p>For <strong>education</strong>, you can imagine a mathematic professor designing a highly
+interactive patch that shows some mathematical property or illustrates a
+theorem that its students can play with to better understand the subject. Or
+this visual programming language can be a toy language for children to start
+learning principles of programming, in the same way as Scratch but directly in
+the browser.</p>
+
+<p>By nature, this approach is very <strong>responsive</strong>, and it can be used to produce
+text document with lots interactivity. For example one can use the
+<a href="http://worrydream.com/Tangle/">Tangle</a> library and easily add the logic part
+with visual programming instead of javascript. Or one can create a
+presentation that gather some real-time on line data and displays it
+dynamically in a graph.</p>
+
+<p>It can be used to allow users to <strong>extend an existing application</strong> with some
+specific behavior. For example, some mail application can have a small visual
+programming facility that can be used by the user to add a button that tags
+the current mail with some fix tags the user uses very often together.</p>
+
+<p>This kind of language is also very well suit to be used with javascript
+enabled <strong>controllers</strong> (Arduino...) to program some hardware.</p>
+
+<p>And of course, as it is the main inspiration for this work, by combining this
+javascript visual programming with WebAudio, we can create an <strong>small Pure
+Data like tool</strong>!</p>
+
+<hr><p><strong>Who am I?</strong></p>
+
+<p>I am a computer scientist for scientific research from Toulouse (France).
+My experiences range from scientific studies, algorithm development and
+optimization, GUI development to processing and data server development.</p>
+
+<p>Javascript is not the core of my activity but I have a high interest in it and
+I have used it every know and then for in house projects for several years.</p>
+
+
       </section>
       <footer>
-        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+        <p><small>Hosted on GitHub Pages — Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
       </footer>
     </div>
-    <script src="javascripts/scale.fix.js"></script>
+    <script src="scale.js"></script>
     
-  </body>
-</html>
+  
+</body></html>
