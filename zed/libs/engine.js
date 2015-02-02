@@ -45,6 +45,7 @@
         return content;
     };
 
+    // TODO change name.
     var fireEvent2 = function (target, value) {
         var content = target.content;
         var tagName = content.tagName;

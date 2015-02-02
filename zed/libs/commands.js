@@ -12,6 +12,7 @@
 /*global Mousetrap */
 
 
+// TODO 0 move
 var http = {};
 http.get = function (url, success) {
   var request = new XMLHttpRequest();
@@ -49,6 +50,7 @@ http.get = function (url, success) {
         }
     };
 
+    // TODO 'context' or 'mode'?
     var context = 'block';
     var offsetCurrentPort = function (offset) {
         var elements = document.querySelectorAll('z-block.current-off-context * z-port.' + context);
@@ -121,7 +123,6 @@ http.get = function (url, success) {
             args = Array.prototype.slice.call(args, 2);
             args[0] = newContent;
         }
-        console.log(args);
         commands.createBlockElement.apply(null, args);
     };
 
@@ -139,7 +140,11 @@ http.get = function (url, success) {
     };
 
     commands.remove = function () {
-        if (context === 'block') {
+        var selected = document.querySelector('.selected');
+        if (selected !== null && selected.tagName === 'Z-LINK') {
+            var link = selected;
+            link.unconnect();
+        } else if (context === 'block') {
             var block = document.querySelector('z-block.current');
             offsetCurrentBlock(1);
             block.unplug();

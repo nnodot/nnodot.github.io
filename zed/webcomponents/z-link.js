@@ -23,6 +23,7 @@
 
     var htmlTemplate = utils.stringFromCommentInFunction(function () {/*
         <div>
+            <div class="selector"></div>
         </div>
     */});
     var template = utils.dom.createFragment(htmlTemplate);
@@ -42,6 +43,15 @@
             'borderRadius': radius,
             'borderStyle': 'solid',
             'borderColor': 'rgb(150, 150, 150)'
+        },
+        'div.selector': {
+            'position': 'absolute',
+            'left': '10%',
+            'width': '80%',
+            'top': -7,
+            'height': 14,
+            'zIndex': 0,
+            'borderColor': '#333'
         }
     };
     // Apply the css definition and prepending the custom element tag to all
@@ -107,6 +117,9 @@
     var unconnect = function (zlink) {
         zlink.begin.port.links = _.without(zlink.begin.port.links, zlink);
         zlink.end.port.links = _.without(zlink.end.port.links, zlink);
+        if (zlink.parentNode !== null) {
+            zlink.parentNode.removeChild(zlink);
+        }
     };
 
     var proto = Object.create(HTMLElement.prototype);
@@ -114,7 +127,7 @@
         var composedDom = template.cloneNode(true);
         this.appendChild(composedDom);
 
-        // Curried version of 'redraw' with current object indtance.
+        // Curried version of 'redraw' with current object instance.
         // Used for event listeners.
         this.redraw = redraw.bind(null, this);
         this.connect = connect.bind(null, this);
@@ -129,6 +142,8 @@
 
             this.redraw();
         }
+
+        window.selector.setSelectable(this, true);
    };
 
     proto.css = style;
