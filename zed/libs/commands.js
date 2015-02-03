@@ -199,6 +199,7 @@ http.get = function (url, success) {
     var goOutOfCommandLine = function () {
         TermGlobals.keylock = true;
         TermGlobals.activeTerm.cursorOff();
+        bindKeysForMainMode();
         var termDiv = document.querySelector('#termDiv');
         termDiv.classList.toggle('focused');
     };
@@ -247,19 +248,24 @@ http.get = function (url, success) {
 
     commands.goToCommandLine = function () {
         TermGlobals.keylock = false;
+        Mousetrap.reset();
         TermGlobals.activeTerm.cursorOn();
         var termDiv = document.querySelector('#termDiv');
         termDiv.classList.toggle('focused');
     };
 
+    commands.editBlock = function (block) {
+        if (block.content.tagName !== 'BUTTON') {
+            Mousetrap.reset();
+            Mousetrap.bind('esc', commands.escape);
+            block.content.focus();
+        }
+    };
+
     commands.edit = function () {
         if (context === 'block') {
             var block = document.querySelector('z-block.current');
-            if (block.content.tagName !== 'BUTTON') {
-                Mousetrap.reset();
-                Mousetrap.bind('esc', commands.escape);
-                block.content.focus();
-            }
+            commands.editBlock(block);
         }
     };
 
@@ -323,8 +329,8 @@ http.get = function (url, success) {
 
     commands.escape = function () {
         if (context === 'block') {
-            var block = document.querySelector('z-block.current');
-            block.content.blur();
+            var currentltEditingElement = utils.dom.getSelectionStart();
+            currentltEditingElement.blur();
             bindKeysForMainMode();
         }
     };
@@ -411,7 +417,8 @@ http.get = function (url, success) {
         Mousetrap.bind('esc', bindKeysForMainMode);
     };
 
-    // Set a new stopCallback for Moustrap to avoid stopping
+    // Set a new stopCallback for Moustrap to avoid stopping when we start
+    // editing a contenteditable, so that we can use escape to leave editing.
     Mousetrap.stopCallback = function(e, element, combo) {
         // if the element has the class "mousetrap" then no need to stop
         if ((' ' + element.className + ' ').indexOf(' mousetrap ') > -1) {

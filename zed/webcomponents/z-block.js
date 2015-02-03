@@ -48,7 +48,8 @@
             'border-left': '3px solid',
             'border-left-color': 'white',
             'border-right': '3px solid',
-            'border-right-color': 'white'
+            'border-right-color': 'white',
+            'boxShadow': '2px 2px 3px 0px #dfdfdf'
         },
         '.content-container': {
             'padding': '8px 15px 8px 15px'
@@ -219,6 +220,8 @@
 
     // TODO clean globals
     window.getElementBlock = function (element) {
+        // TODO do a search to find the first parent block for cases where
+        // element is dwon in the element hiearchy.
         return element.parentNode.parentNode.parentNode;
     };
 })();
