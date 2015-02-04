@@ -37,6 +37,9 @@
             z-block.current.cursor-displayed > div {
                 border-left-color: #e66;
             }
+            z-block.current.cursor-displayed.stop-blinking > div {
+                border-left-color: #faa;
+            }
             z-block.current > div {
                 border-left-color: #faa;
             }
@@ -99,19 +102,12 @@
                 color: #fff;
                 height: 23px;
             }
+            #termDiv: {
+                background: #f0f0f0;
+                padding: 10px;
+                margin-top: 10px;
+            }
         </style>
-
-
-        <script type="text/javascript">
-            var _gaq = _gaq || [];
-            _gaq.push(['_setAccount', 'UA-47048956-1']);
-            _gaq.push(['_trackPageview']);
-            (function() {
-                var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-                ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-                var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-            })();
-        </script>
 
     </head>
 
@@ -137,11 +133,11 @@
 
                 <div style='background:#f0f0f0;padding:15px;'>
                     <div id="patch" style='width500px;height:400px' onclick="window.selector.unselect()">
-                        <z-block id="button-a" class="draggable current" style="top:0px;left:0px">
+                        <z-block id="button-a" style="top:0px;left:0px">
                             <button class="ze-content" onclick="sendEventToOutputPort(this)" contenteditable>go</button>
                             <z-port id="p1" class="output"></z-port>
                         </z-block>
-                        <z-block id="script-a" style="top:70px;left:0px">
+                        <z-block id="script-a" class="current stop-blinking" style="top:70px;left:0px">
                             <z-port id="p1" class="input"></z-port>
                             <!-- FIX ME if the output port is put after the script it
                             is not inserted at the right place in the block -->
@@ -176,8 +172,12 @@
                     </div>
                 </div>
 
-                <div id="termDiv" class="command-line" style='background:#f0f0f0;padding:10px;margin-top:10px;'></div>
-                <div style="color:#aaa;font-size:smaller;">zed source codes are on <a style="color:#666" href="https://github.com/nnodot/zed">github</a></div>
+                <div id="termDiv" class="command-line"
+                    onclick="commands.goToCommandLine();"></div>
+
+                <div style="color:#aaa;font-size:smaller;">
+                    zed source codes are on <a style="color:#666" href="https://github.com/nnodot/zed">github</a>
+                </div>
             </div>
 
             <div id="help" style="float: left; width: 20%;">

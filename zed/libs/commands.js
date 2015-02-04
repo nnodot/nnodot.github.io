@@ -12,17 +12,6 @@
 /*global Mousetrap */
 
 
-// TODO 0 move
-var http = {};
-http.get = function (url, success) {
-  var request = new XMLHttpRequest();
-  request.onload = function (e) {
-    success(JSON.parse(request.responseText));
-  };
-  request.open("get", url, true);
-  request.send();
-};
-
 (function(){
     'use strict';
     // Keyboard shortcuts.
@@ -49,6 +38,7 @@ http.get = function (url, success) {
             }
         }
     };
+    window.setCurrentBlock = setCurrentBlock;
 
     // TODO 'context' or 'mode'?
     var context = 'block';
@@ -196,12 +186,27 @@ http.get = function (url, success) {
         } catch(e) {}
     };
 
+    var startBlinking = function () {
+        var block = document.querySelector('z-block.current');
+        if (block.classList.contains('stop-blinking')) {
+            block.classList.toggle('stop-blinking');
+        }
+    };
+
+    var stopBlinking = function () {
+        var block = document.querySelector('z-block.current');
+        if (!block.classList.contains('stop-blinking')) {
+            block.classList.toggle('stop-blinking');
+        }
+    };
+
     var goOutOfCommandLine = function () {
         TermGlobals.keylock = true;
         TermGlobals.activeTerm.cursorOff();
         bindKeysForMainMode();
         var termDiv = document.querySelector('#termDiv');
         termDiv.classList.toggle('focused');
+        startBlinking();
     };
 
     var ctrlHandler = function () {
@@ -247,25 +252,30 @@ http.get = function (url, success) {
     var res = term.open();
 
     commands.goToCommandLine = function () {
+        if (TermGlobals.keylock === false) {
+            return;
+        }
         TermGlobals.keylock = false;
         Mousetrap.reset();
         TermGlobals.activeTerm.cursorOn();
         var termDiv = document.querySelector('#termDiv');
         termDiv.classList.toggle('focused');
+        stopBlinking();
     };
 
     commands.editBlock = function (block) {
-        if (block.content.tagName !== 'BUTTON') {
-            Mousetrap.reset();
-            Mousetrap.bind('esc', commands.escape);
-            block.content.focus();
-        }
+        Mousetrap.reset();
+        Mousetrap.bind('esc', commands.escape);
+        block.content.focus();
     };
 
     commands.edit = function () {
         if (context === 'block') {
             var block = document.querySelector('z-block.current');
             commands.editBlock(block);
+            stopBlinking();
+            // Prevent default when this function is used with Moustrap.
+            return false;
         }
     };
 
@@ -286,7 +296,7 @@ http.get = function (url, success) {
             term.write('Press Esc to leave the command line and go back to normal mode.');
             term.newLine();
             term.newLine();
-            term.write('Commands: next, prev, remove and add.');
+            term.write('Commands: next, prev, remove, add and set content.');
         } else if (subject === 'add') {
             term.write('Add a new block just below the current block.');
             term.newLine();
@@ -329,8 +339,11 @@ http.get = function (url, success) {
 
     commands.escape = function () {
         if (context === 'block') {
-            var currentltEditingElement = utils.dom.getSelectionStart();
-            currentltEditingElement.blur();
+            var currentlyEditingElement = utils.dom.getSelectionStart();
+            if (currentlyEditingElement !== null) {
+                currentlyEditingElement.blur();
+                startBlinking();
+            }
             bindKeysForMainMode();
         }
     };
@@ -417,6 +430,15 @@ http.get = function (url, success) {
         Mousetrap.bind('esc', bindKeysForMainMode);
     };
 
+    commands.set = function (target, value) {
+        if (target === 'content') {
+            if (context === 'block') {
+                var block = document.querySelector('z-block.current');
+                block.content.innerHTML = value;
+            }
+        }
+    };
+
     // Set a new stopCallback for Moustrap to avoid stopping when we start
     // editing a contenteditable, so that we can use escape to leave editing.
     Mousetrap.stopCallback = function(e, element, combo) {
@@ -440,5 +462,16 @@ http.get = function (url, success) {
 
     bindKeysForMainMode();
     goOutOfCommandLine();
+
+    var http = {};
+    window.http = http;
+    http.get = function (url, success) {
+      var request = new XMLHttpRequest();
+      request.onload = function (e) {
+        success(JSON.parse(request.responseText));
+      };
+      request.open("get", url, true);
+      request.send();
+    };
 
 })();
